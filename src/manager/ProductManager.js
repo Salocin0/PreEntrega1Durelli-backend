@@ -30,6 +30,7 @@ export default class ProductManager {
       status:status,
       category:category
     };
+    
     if (this.products.find((x) => x.code === code) === undefined) {
       this.products.push(product);
       fs.writeFileSync(this.path+"products.json",JSON.stringify(this.products));
