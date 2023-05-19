@@ -12,10 +12,9 @@ export default class ProductManager {
     try {
       fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
     } catch (error) {
-      console.log("error al crear archivo: " + error);
+      console.log("error to create file: " + error);
     }
   }
-    
 }
 
   addProduct(title, description, price, thumbnails, code, stock, status,category) {
@@ -36,7 +35,6 @@ export default class ProductManager {
       fs.writeFileSync(this.path+"products.json",JSON.stringify(this.products));
       return product
     } else {
-      console.log("code used");
       return "code used";
     }
   }
@@ -64,7 +62,7 @@ export default class ProductManager {
     if (product) {
       return product;
     } else {;
-      return `No se encontró ningún producto con el ID ${id}`;
+      return `Product with ID ${id} not found`;
     }
   }
 
@@ -75,8 +73,7 @@ export default class ProductManager {
       fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
       return product;
     } else {
-      console.log(`No se encontró ningún producto con el ID ${id}`);
-      return `No se encontró ningún producto con el ID ${id}`;
+      return `Product with ID ${id} not found`;
     }
   }
 
@@ -84,8 +81,7 @@ export default class ProductManager {
     const initialLength = this.products.length;
     this.products = this.products.filter(x => x.id != id);
     if (initialLength === this.products.length) {
-      console.log(`No se encontró ningún objeto con el ID ${id}, no se puede eliminar`);
-      return `No se encontró ningún objeto con el ID ${id}, no se puede eliminar`
+      return `Product with ID ${id} not found, can't be deleted`
     } else {
       fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
       return this.products

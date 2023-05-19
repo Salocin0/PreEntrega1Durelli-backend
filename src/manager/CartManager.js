@@ -12,7 +12,7 @@ export default class CartManager {
     try {
       fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
     } catch (error) {
-      console.log("error al crear archivo: " + error);
+      console.log("error to create file: " + error);
     }
   }
   }
@@ -59,7 +59,7 @@ export default class CartManager {
     const initialLength = this.carts.length;
     this.carts = this.carts.filter(x => x.id !== id);
     if (initialLength === this.carts.length) {
-      console.log(`No se encontró ningún cart con el ID ${id}, no se puede eliminar`);
+      return `Cart with ID ${id} not found, can't be deleted`
     } else {
       fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
     }
@@ -72,8 +72,7 @@ export default class CartManager {
       fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
       return cart;
     } else {
-      console.log(`No se encontró ningún cart con el ID ${id}`);
-      return `No se encontró ningún cart con el ID ${id}`;
+      return `Cart with ID ${id} not found`;
     }
   }
 
