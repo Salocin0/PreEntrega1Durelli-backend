@@ -5,12 +5,12 @@ export default class ProductManager {
     this.products = [];
     this.path = path;
   
-  if (fs.existsSync(this.path + "products.json")) {
-      const fileContent = fs.readFileSync(this.path + "products.json", 'utf-8');
+  if (fs.existsSync(this.path + "productos.json")) {
+      const fileContent = fs.readFileSync(this.path + "productos.json", 'utf-8');
       this.products = JSON.parse(fileContent);
   } else {
     try {
-      fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
+      fs.writeFileSync(this.path + "productos.json", JSON.stringify(this.products));
     } catch (error) {
       console.log("error to create file: " + error);
     }
@@ -32,7 +32,7 @@ export default class ProductManager {
     
     if (this.products.find((x) => x.code === code) === undefined) {
       this.products.push(product);
-      fs.writeFileSync(this.path+"products.json",JSON.stringify(this.products));
+      fs.writeFileSync(this.path+"productos.json",JSON.stringify(this.products));
       return product
     } else {
       return "code used";
@@ -51,13 +51,13 @@ export default class ProductManager {
   }
 
   getProducts() {
-    const data = fs.readFileSync(this.path + "products.json", 'utf-8');
+    const data = fs.readFileSync(this.path + "productos.json", 'utf-8');
     this.products = JSON.parse(data);
     return this.products;
   }
 
   getProductsById(id) {
-    this.products = JSON.parse(fs.readFileSync(this.path + "products.json", 'utf-8'));
+    this.products = JSON.parse(fs.readFileSync(this.path + "productos.json", 'utf-8'));
     const product = this.products.find(x => x.id == id);
     if (product) {
       return product;
@@ -70,7 +70,7 @@ export default class ProductManager {
     const pActual = this.getProductsById(id);
     if (pActual) {
       Object.assign(pActual, product);
-      fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
+      fs.writeFileSync(this.path + "productos.json", JSON.stringify(this.products));
       return product;
     } else {
       return `Product with ID ${id} not found`;
@@ -83,7 +83,7 @@ export default class ProductManager {
     if (initialLength === this.products.length) {
       return `Product with ID ${id} not found, can't be deleted`
     } else {
-      fs.writeFileSync(this.path + "products.json", JSON.stringify(this.products));
+      fs.writeFileSync(this.path + "productos.json", JSON.stringify(this.products));
       return this.products
     }
   }

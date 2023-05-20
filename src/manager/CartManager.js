@@ -5,12 +5,12 @@ export default class CartManager {
     this.carts = [];
     this.path = path;
     
-    if (fs.existsSync(this.path + "carts.json")) {
-      const fileContent = fs.readFileSync(this.path + "carts.json", 'utf-8');
+    if (fs.existsSync(this.path + "carrito.json")) {
+      const fileContent = fs.readFileSync(this.path + "carrito.json", 'utf-8');
       this.carts = JSON.parse(fileContent);
   } else {
     try {
-      fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
+      fs.writeFileSync(this.path + "carrito.json", JSON.stringify(this.carts));
     } catch (error) {
       console.log("error to create file: " + error);
     }
@@ -24,7 +24,7 @@ export default class CartManager {
       products: product
     };
     this.carts.push(cart)
-    fs.writeFileSync(this.path+"carts.json",JSON.stringify(this.carts));
+    fs.writeFileSync(this.path+"carrito.json",JSON.stringify(this.carts));
     return cart
   }
 
@@ -40,13 +40,13 @@ export default class CartManager {
   }
 
   getCarts() {
-    const data = fs.readFileSync(this.path + "carts.json", 'utf-8');
+    const data = fs.readFileSync(this.path + "carrito.json", 'utf-8');
     this.carts = JSON.parse(data);
     return this.carts;
   }
 
   getCartById(id) {
-    this.carts = JSON.parse(fs.readFileSync(this.path + "carts.json", 'utf-8'));
+    this.carts = JSON.parse(fs.readFileSync(this.path + "carrito.json", 'utf-8'));
     const cart = this.carts.find(x => x.id == id);
     if (cart) {
       return cart;
@@ -61,7 +61,7 @@ export default class CartManager {
     if (initialLength === this.carts.length) {
       return `Cart with ID ${id} not found, can't be deleted`
     } else {
-      fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
+      fs.writeFileSync(this.path + "carrito.json", JSON.stringify(this.carts));
     }
   }
 
@@ -69,7 +69,7 @@ export default class CartManager {
     const cActual = this.getCartById(id);
     if (cActual) {
       Object.assign(cActual, cart);
-      fs.writeFileSync(this.path + "carts.json", JSON.stringify(this.carts));
+      fs.writeFileSync(this.path + "carrito.json", JSON.stringify(this.carts));
       return cart;
     } else {
       return `Cart with ID ${id} not found`;
